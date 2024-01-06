@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
 // include language configuration file based on selected language
 $titulo = 'Intranet Logia Caleuche 250';
 $lang = "es";
