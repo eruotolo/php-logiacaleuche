@@ -1,0 +1,13 @@
+{
+  "name": "Template TailwindCSS",
+  "version": "1.0.0",
+  "author": "Edgardo Ruotolo",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.2.4"
+  },
+  "scripts": {
+    "build": "npx tailwindcss -i ./src/style.css -o ./public/assets/css/style.css -w",
+    "minify": "npx tailwindcss -i ./src/style.css -o ./public/assets/css/style.min.css --minify"
+  }
+}

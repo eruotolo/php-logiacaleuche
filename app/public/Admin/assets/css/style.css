@@ -1,0 +1,133 @@
+/* --------------------------- CSS PERSONALIZADO ----------------------------*/
+.logo-caleuche{
+    width: 150px;
+}
+.dataTables_filter > label > input{
+    width: 340px !important;
+}
+.info-personal > h3{
+    margin-bottom: 30px;
+}
+.info-personal > button{
+    float: right;
+}
+.img-perfil > input{
+    width: 148px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.btn-actualizar > button{
+    margin-top: 20px;
+}
+.iconos-menu img{
+    width: 20px;
+    margin-right: 8px;
+}
+#change-password{
+    margin-top: 100px;
+}
+.tabla-perfil tbody tr{
+    border: none !important;
+}
+.tabla-perfil > tbody > tr > td{
+    border: none !important;
+}
+.item-perfil{
+    padding-top: 20px;
+}
+
+.saludar > a > svg{
+    width: 50px;
+    height: 20px;
+    color: #5156be
+}
+.event-titulo{
+    font-size: 15px;
+    margin-bottom: 1px;
+}
+.event-fecha,
+.event-date{
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+.evento-fecha span{
+    font-size: 18px;
+}
+.active>.page-link, .page-link.active{
+    color: #fff;
+    border-color: #2980b9;
+    background-color: #2980b9;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    color: #fff;
+    border-color: #2980b9;
+    background-color: #2980b9;
+}
+a{
+    color: #2980b9;
+}
+.text-primary{
+    color: #2980b9;
+}
+.btn-primary{
+   border-color: #2980b9;
+    background-color: #2980b9;
+}
+.box-category{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.btn-category{
+    background-color: #2980b9;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: .75rem;
+    text-align: center;
+    padding: 0 .5rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-right: .75rem;
+    margin-top: .75rem;
+}
+.img-news{
+    height: 175px;
+    width: 100%;
+    object-fit: cover;
+}
+.col-totales{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.col-entrada{
+    background-color: #41a65a;
+    padding: 30px;
+    border: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 32%;
+}
+.style-col > h3{
+    color: #FFFFFF;
+}
+.style-col > h4{
+    color: #FFFFFF;
+    font-weight: normal;
+}
+.col-salida{
+    background-color: #56c0ef;
+    padding: 30px;
+    border: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 32%;
+}
+.col-total{
+    background-color: #f29c13;
+    padding: 30px;
+    border: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 32%;
+}
