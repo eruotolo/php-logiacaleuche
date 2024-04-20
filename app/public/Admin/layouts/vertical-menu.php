@@ -57,7 +57,6 @@
                 <button type="button" class="btn header-item noti-icon position-relative"  aria-haspopup="true" aria-expanded="false" onclick="location.href='apps-email-inbox.php'">
                     <i data-feather="bell" class="icon-lg"></i>
                     <?php
-                    global $link;
                     // Consulta SQL
                     $sql = "SELECT COUNT(*) AS cantidad_mensajes_sin_leer FROM message WHERE status_Message = 0 AND to_Message = $id_user";
                     $resultado = mysqli_query($link, $sql);

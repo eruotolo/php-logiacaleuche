@@ -18,4 +18,6 @@ db_usuario: uyg1o9ehfwnzx
 usu_pass: Guns026772
 db_name: dbeaag3s1tjjr4
 
+clave_smtp=xsmtpsib-03055b179850b8a8bf7f6bc3985403fc2bb7f1e786167d129521ad2c6d3ad902-GVqxrFzbg93ywmsc
+
 

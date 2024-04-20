@@ -58,7 +58,7 @@
                         $result_task1 = mysqli_query($link, $query);
                         while ($row = mysqli_fetch_Array($result_task1))  {
                             ?>
-                            <h4>$ <?php echo $row['total_entrada'] ?></h4>
+                            <h4>$ <?php echo number_format($row['total_entrada'], 0, ',', '.'); ?></h4>
                             <?php
                         }
                         ?>
@@ -71,7 +71,7 @@
                         $result_task2 = mysqli_query($link, $query);
                         while ($row = mysqli_fetch_Array($result_task2))  {
                             ?>
-                            <h4>$ <?php echo $row['total_salida'] ?></h4>
+                            <h4>$ <?php echo number_format($row['total_salida'], 0, ',', '.'); ?></h4>
                             <?php
                         }
                         ?>
@@ -86,7 +86,7 @@
                         $result_task3 = mysqli_query($link, $query);
                         while ($row = mysqli_fetch_Array($result_task3))  {
                             ?>
-                            <h4>$ <?php echo $row['saldo_total'] ?></h4>
+                            <h4>$ <?php echo number_format($row['saldo_total'], 0, ',', '.'); ?></h4>
                             <?php
                         }
                         ?>
@@ -143,6 +143,7 @@
                                             <th>Motivo</th>
                                             <th>Fecha del Movimiento</th>
                                             <th>Monto</th>
+                                            <th>Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -150,7 +151,7 @@
                                         $query ="SELECT *, E.id_Entrada as 'eid' from entradadinero E
                                             JOIN users U on E.id_User = U.id
                                             JOIN entradamotivo EM on E.entrada_Motivo = EM.id_Motivo
-                                            ORDER BY E.entrada_MovimientoFecha DESC;";
+                                            ORDER BY entrada_Mes DESC;";
                                         $result_task = mysqli_query($link, $query);
                                         while ($row = mysqli_fetch_Array($result_task))  {
                                             ?>
@@ -159,14 +160,16 @@
                                                 <td><?php echo $row['entrada_Mes'] ?></td>
                                                 <td><?php echo $row['entrada_Ano'] ?></td>
                                                 <td><?php echo $row['name_Motivo'] ?></td>
-                                                <td><?php echo date('d/m/Y', strtotime($row['entrada_MovimientoFecha'])); ?></td>
-                                                <td>$ <?php echo $row['entrada_Monto'] ?></td>
+                                                <td><?php echo $row['entrada_MovimientoFecha'] ?></td>
+                                                <td>$ <?php echo number_format($row['entrada_Monto'], 0, ',', '.'); ?></td>
+                                                <td style="text-align: center"><a href="controller/enviar-boleta.php?id_Entrada=<?php echo $row['id_Entrada'] ?>"><i class="fas fa-paper-plane"></i></a></td>
                                             </tr>
                                             <?php
                                         }
                                         ?>
                                     </tbody>
                                 </table>
+
                             </div>
                             <!-- SCRIP PARA MOSTRAR EL TOTAL -->
 
@@ -212,10 +215,53 @@
 <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
-<!-- Datatable init js -->
-<script src="assets/js/pages/datatables.init.js"></script>
-
 <script src="assets/js/app.js"></script>
+
+<!--DATA TABLES CONFIGURACIÓN PERSONALIZADA -->
+
+<script>
+	$(document).ready(function () {
+		var table = $('#datatable-buttons').DataTable({
+			lengthMenu: [
+				[30, 60, 90, -1],
+				[30, 60, 90, 'All'],
+			], // Define los valores para la opción "Show Entries"
+			responsive: true,
+			order: [[ 4, "desc" ]], //Ordenar por columna Fecha Seguimiento (la 5ta columna)
+			columnDefs: [ {
+				targets: 4, //La columna Fecha Seguimiento
+				type: 'date' // Asignarle el tipo de dato Date
+			} ],
+			buttons: ['copy', 'excel', 'pdf', 'colvis'],
+
+			language: {
+				search: 'Buscar:',
+				lengthMenu: 'Mostrar _MENU_ entradas', // Personaliza el texto de "Show Entries"
+				info: 'Mostrando _PAGE_ de _PAGES_ páginas',
+				infoEmpty: 'Mostrando 0 a 0 de 0 elementos',
+				infoFiltered: '(filtrado de _MAX_ elementos en total)',
+				emptyTable: 'No hay datos disponibles en la tabla',
+				loadingRecords: 'Cargando...',
+				zeroRecords: 'No se encontraron registros coincidentes',
+				aria: {
+					sortAscending: ': permite ordenar la columna en orden ascendente',
+					sortDescending: ': habilita ordenar la columna en orden descendente',
+				},
+				paginate: {
+					first: 'Primero',
+					previous: 'Anterior',
+					next: 'Siguiente',
+					last: 'Último',
+				},
+			},
+		});
+
+		table.buttons().container().appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
+
+		$('.dataTables_length select').addClass('form-select form-select-sm');
+	});
+
+</script>
 
 </body>
 

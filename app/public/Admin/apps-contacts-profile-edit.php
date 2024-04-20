@@ -54,7 +54,6 @@ if ($query_run) {
                         </div>
                     </div>
                 </div>
-
                 <!-- end page title -->
 
                 <div class="row">

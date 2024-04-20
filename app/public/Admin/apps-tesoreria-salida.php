@@ -58,7 +58,7 @@
                         $result_task1 = mysqli_query($link, $query);
                         while ($row = mysqli_fetch_Array($result_task1))  {
                             ?>
-                            <h4>$ <?php echo $row['total_entrada'] ?></h4>
+                            <h4>$ <?php echo number_format($row['total_entrada'], 0, ',', '.'); ?></h4>
                             <?php
                         }
                         ?>
@@ -71,7 +71,7 @@
                         $result_task2 = mysqli_query($link, $query);
                         while ($row = mysqli_fetch_Array($result_task2))  {
                             ?>
-                            <h4>$ <?php echo $row['total_salida'] ?></h4>
+                            <h4>$ <?php echo number_format($row['total_salida'], 0, ',', '.'); ?></h4>
                             <?php
                         }
                         ?>
@@ -80,17 +80,16 @@
                         <h3>TOTAL EN CAJA</h3>
                         <?php
                         $query ="SELECT
-                                    COALESCE((SELECT SUM(COALESCE(entrada_Monto, 0)) FROM entradadinero), 0) -
-                                    COALESCE((SELECT SUM(COALESCE(salida_Monto, 0)) FROM salidadinero), 0) AS saldo_total;
-                                ";
+                                COALESCE((SELECT SUM(COALESCE(entrada_Monto, 0)) FROM entradadinero), 0) -
+                                COALESCE((SELECT SUM(COALESCE(salida_Monto, 0)) FROM salidadinero), 0) AS saldo_total;
+                            ";
                         $result_task3 = mysqli_query($link, $query);
                         while ($row = mysqli_fetch_Array($result_task3))  {
                             ?>
-                        <h4>$ <?php echo $row['saldo_total'] ?></h4>
+                            <h4>$ <?php echo number_format($row['saldo_total'], 0, ',', '.'); ?></h4>
                             <?php
                         }
                         ?>
-
                     </div>
                 </div>
 
@@ -154,7 +153,7 @@
                                     $query ="SELECT *, S.id_Salida as 'sid' from salidadinero S
                                                      JOIN users U on S.id_User = U.id
                                                      JOIN salidamotivo SM on S.salida_Motivo = SM.id_SalidaMotivo
-                                            ORDER BY S.salida_MovimientoFecha DESC";
+                                            ORDER BY salida_MovimientoFecha DESC";
                                     $result_task = mysqli_query($link, $query);
                                     while ($row = mysqli_fetch_Array($result_task))  {
                                         ?>
@@ -163,8 +162,8 @@
                                             <td><?php echo $row['salida_Mes'] ?></td>
                                             <td><?php echo $row['salida_Ano'] ?></td>
                                             <td><?php echo $row['name_SalidaMotivo'] ?></td>
-                                            <td><?php echo date('d/m/Y', strtotime($row['salida_MovimientoFecha'])); ?></td>
-                                            <td>$ <?php echo $row['salida_Monto'] ?></td>
+                                            <td><?php echo $row['salida_MovimientoFecha'] ?></td>
+                                            <td>$ <?php echo number_format($row['salida_Monto'], 0, ',', '.'); ?></td>
                                         </tr>
                                         <?php
                                     }
@@ -215,10 +214,53 @@
 <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
-<!-- Datatable init js -->
-<script src="assets/js/pages/datatables.init.js"></script>
 
 <script src="assets/js/app.js"></script>
+
+<!--DATA TABLES CONFIGURACIÓN PERSONALIZADA -->
+<script>
+	$(document).ready(function () {
+		var table = $('#datatable-buttons').DataTable({
+			lengthMenu: [
+				[30, 60, 90, -1],
+				[30, 60, 90, 'All'],
+			], // Define los valores para la opción "Show Entries"
+			responsive: true,
+			order: [[ 4, "desc" ]], //Ordenar por columna Fecha Seguimiento (la 5ta columna)
+			columnDefs: [ {
+				targets: 4, //La columna Fecha Seguimiento
+				type: 'date' // Asignarle el tipo de dato Date
+			} ],
+			buttons: ['copy', 'excel', 'pdf', 'colvis'],
+
+			language: {
+				search: 'Buscar:',
+				lengthMenu: 'Mostrar _MENU_ entradas', // Personaliza el texto de "Show Entries"
+				info: 'Mostrando _PAGE_ de _PAGES_ páginas',
+				infoEmpty: 'Mostrando 0 a 0 de 0 elementos',
+				infoFiltered: '(filtrado de _MAX_ elementos en total)',
+				emptyTable: 'No hay datos disponibles en la tabla',
+				loadingRecords: 'Cargando...',
+				zeroRecords: 'No se encontraron registros coincidentes',
+				aria: {
+					sortAscending: ': permite ordenar la columna en orden ascendente',
+					sortDescending: ': habilita ordenar la columna en orden descendente',
+				},
+				paginate: {
+					first: 'Primero',
+					previous: 'Anterior',
+					next: 'Siguiente',
+					last: 'Último',
+				},
+			},
+		});
+
+		table.buttons().container().appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
+
+		$('.dataTables_length select').addClass('form-select form-select-sm');
+	});
+
+</script>
 
 </body>
 

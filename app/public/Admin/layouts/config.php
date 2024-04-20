@@ -24,8 +24,8 @@ if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 
-$gmailid = 'crowadvancegx@gmail.com'; // YOUR gmail email
-$gmailpassword = 'Milonga3841'; // YOUR gmail password
-$gmailusername = 'crowadvancegx@gmail.com'; // YOUR gmail User name
+$gmailid = 'tesoreria@logiacaleuche.cl'; // YOUR gmail email
+$gmailpassword = 'xsmtpsib-03055b179850b8a8bf7f6bc3985403fc2bb7f1e786167d129521ad2c6d3ad902-GVqxrFzbg93ywmsc'; // YOUR gmail password
+$gmailusername = 'edgardoruotolo@gmail.com'; // YOUR gmail User name
 
 ?>

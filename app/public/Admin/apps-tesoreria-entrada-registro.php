@@ -87,18 +87,18 @@
                                     <label for="entrada_Mes" class="col-sm-3 col-form-label">Mes de Ingreso</label>
                                     <div class="col-sm-5">
                                         <select name="entrada_Mes" id="entrada_Mes" class="form-select">
-                                            <option value="Enero">Enero</option>
-                                            <option value="Febrero">Febrero</option>
-                                            <option value="Marzo">Marzo</option>
-                                            <option value="Abril">Abril</option>
-                                            <option value="Mayo">Mayo</option>
-                                            <option value="Junio">Junio</option>
-                                            <option value="Julio">Julio</option>
-                                            <option value="Agosto">Agosto</option>
-                                            <option value="Septiembre">Septiembre</option>
-                                            <option value="Octubre">Octubre</option>
-                                            <option value="Noviembre">Noviembre</option>
-                                            <option value="Diciembre">Diciembre</option>
+                                            <option value="01 - Enero">Enero</option>
+                                            <option value="02 - Febrero">Febrero</option>
+                                            <option value="03 - Marzo">Marzo</option>
+                                            <option value="04 - Abril">Abril</option>
+                                            <option value="05 - Mayo">Mayo</option>
+                                            <option value="06 - Junio">Junio</option>
+                                            <option value="07 - Julio">Julio</option>
+                                            <option value="08 - Agosto">Agosto</option>
+                                            <option value="09 - Septiembre">Septiembre</option>
+                                            <option value="10 - Octubre">Octubre</option>
+                                            <option value="11 - Noviembre">Noviembre</option>
+                                            <option value="12 - Diciembre">Diciembre</option>
                                         </select>
                                     </div>
                                 </div>
