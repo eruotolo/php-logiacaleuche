@@ -106,7 +106,7 @@
                                 <div class="row mb-4">
                                     <label for="entrada_Ano" class="col-sm-3 col-form-label">Año</label>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" name="entrada_Ano" id="entrada_Ano" placeholder="Ingrese el año" required>
+                                        <input type="number" class="form-control" name="entrada_Ano" id="entrada_Ano" placeholder="Ingrese el año" value="<?php echo date('Y'); ?>" required>
                                     </div>
                                 </div>
 
@@ -135,16 +135,24 @@
                                 </div>
 
                                 <div class="row mb-4">
-                                    <label for="entrada_MovimientoFecha" class="col-sm-3 col-form-label">Fecha Movimiento</label>
+                                    <label for="entrada_MovimientoFecha" class="col-sm-3 col-form-label">Fecha y Hora Movimiento</label>
                                     <div class="col-sm-5">
-                                        <input type="date" class="form-control" name="entrada_MovimientoFecha" id="entrada_MovimientoFecha"  required>
+                                        <?php
+                                        // Establecer fecha y hora actual del servidor como valor por defecto
+                                        $fechaHoraActual = date('Y-m-d\TH:i');
+                                        ?>
+                                        <input type="datetime-local" class="form-control" name="entrada_MovimientoFecha" id="entrada_MovimientoFecha" value="<?php echo $fechaHoraActual; ?>" required>
                                     </div>
                                 </div>
 
                                 <div class="row mb-4">
                                     <label for="entrada_Monto" class="col-sm-3 col-form-label">Monto $</label>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" name="entrada_Monto" id="entrada_Monto" placeholder="Ingrese un monto" required>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" name="entrada_Monto" id="entrada_Monto" placeholder="Ingrese un monto" required>
+                                            <button class="btn btn-outline-primary" type="button" id="btn_monto_45000">45.000</button>
+                                            <button class="btn btn-outline-primary" type="button" id="btn_monto_15000">15.000</button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -195,6 +203,16 @@
 <script src="assets/js/pages/datatable-pages.init.js"></script>
 
 <script src="assets/js/app.js"></script>
+
+<script>
+document.getElementById('btn_monto_45000').addEventListener('click', function() {
+    document.getElementById('entrada_Monto').value = 45000;
+});
+
+document.getElementById('btn_monto_15000').addEventListener('click', function() {
+    document.getElementById('entrada_Monto').value = 15000;
+});
+</script>
 
 </body>
 

@@ -169,6 +169,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="apps-tesoreria-entrada.php"><?php echo $language["Tesoreria_Entrada"]; ?></a></li>
                         <li><a href="apps-tesoreria-salida.php"><?php echo $language["Tesoreria_Salida"]; ?></a></li>
+                        <li><a href="apps-tesoreria-informe.php"><?php echo $language["Generar_Informe"]; ?></a></li>
                     </ul>
                 </li>
                     <?php

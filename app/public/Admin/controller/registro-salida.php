@@ -11,8 +11,11 @@ if(isset($_POST['crear'])) {
     $salida_Monto = $_POST['salida_Monto'];
     $salida_MovimientoFecha = $_POST['salida_MovimientoFecha'];
 
+    // Convertir formato datetime-local (Y-m-d\TH:i) a formato MySQL (Y-m-d H:i:s)
+    $salida_MovimientoFecha = str_replace('T', ' ', $salida_MovimientoFecha) . ':00';
+
     // GUARDAR ENTRADA EN BASE DE DATOS
-    $sql = "INSERT INTO salidadinero (id_User, salida_Mes, salida_Ano,salida_Motivo, salida_Monto, salida_MovimientoFecha ) 
+    $sql = "INSERT INTO salidadinero (id_User, salida_Mes, salida_Ano,salida_Motivo, salida_Monto, salida_MovimientoFecha )
             VALUES ('$id_User', '$salida_Mes', '$salida_Ano','$salida_Motivo', '$salida_Monto', '$salida_MovimientoFecha')";
 
     //echo $sql;

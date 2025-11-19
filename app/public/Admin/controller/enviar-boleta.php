@@ -45,43 +45,43 @@ if(isset($_GET['id_Entrada'])){
         $mail->isHTML(true);
         $mail->Subject = 'Boleta de Pago de Cuota Logial';
         $mail->Body = utf8_decode('
-            <div style="border: 1px solid #000000;width: 840px; height: 310px">
-                <div style="display: flex; justify-content: space-between; ">
-                    <div style="width: 200px; padding-top: 20px; padding-left: 20px; padding-right: 20px">
-                        <img src="https://intranet.logiacaleuche.cl/Admin/assets/images/logo.jpg" style="width: 160px; height: 160px" alt="Logo">
+            <div style="max-width: 840px; width: 100%; margin: 0 auto; border: 1px solid #000000; box-sizing: border-box;">
+                <div style="display: block;">
+                    <div style="width: 100%; padding: 20px; box-sizing: border-box; text-align: center;">
+                        <img src="https://intranet.logiacaleuche.cl/Admin/assets/images/logo.jpg" style="max-width: 160px; width: 100%; height: auto;" alt="Logo">
                     </div>
-                    <div style="width: 600px; padding-top: 20px; padding-left: 20px; padding-right: 20px">
+                    <div style="width: 100%; padding: 0 20px 20px 20px; box-sizing: border-box;">
                         <p style="text-align: right; font-size: 16px; font-weight: 600; margin-top: 1px;margin-bottom: 10px;">Boleta N° ' . $id_Entrada . '</p>
-                        <p style="text-align: right; font-size: 18px; font-weight: bold; margin-top: 1px;;margin-bottom: 1px;">Respetable Logia Caleuche 250</p>
-                        <p style="text-align: right; font-size: 18px; font-weight: bold; margin-top: 1px;;margin-bottom: 1px;">Valle de Castro - Chiloé</p>
+                        <p style="text-align: right; font-size: 18px; font-weight: bold; margin-top: 1px;margin-bottom: 1px;">Respetable Logia Caleuche 250</p>
+                        <p style="text-align: right; font-size: 18px; font-weight: bold; margin-top: 1px;margin-bottom: 1px;">Valle de Castro - Chiloé</p>
                     </div>
                 </div>
-                <div style="width: 800px; padding: 20px">
-                    <table>
+                <div style="width: 100%; padding: 20px; box-sizing: border-box; overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; min-width: 600px;">
                         <thead>
                             <tr>
-                                <th style="width: 280px; border-top: 1px solid #000000; border-left: 1px solid #000000; border-right:1px solid #000000; padding-left: 10px; border-bottom: 1px solid #000000 ">Nombre Q:.H:.</th>
-                                <th style="width: 100px; border-top: 1px solid #000000; border-left: 1px solid #000000; border-right:1px solid #000000; text-align: center; border-bottom: 1px solid #000000; ">Mes Cuota</th>
-                                <th style="width: 50px; border-top: 1px solid #000000; border-left: 1px solid #000000; border-right:1px solid #000000; text-align: center; border-bottom: 1px solid #000000; ">Año</th>
-                                <th style="width: 100px; border-top: 1px solid #000000; border-left: 1px solid #000000; border-right:1px solid #000000; text-align: center; border-bottom: 1px solid #000000; ">Motivo</th>
-                                <th style="width: 130px; border-top: 1px solid #000000; border-left: 1px solid #000000; border-right:1px solid #000000; text-align: center; border-bottom: 1px solid #000000; ">Fecha de Pago</th>
-                                <th style="width: 100px; border-top: 1px solid #000000; border-left: 1px solid #000000; border-right:1px solid #000000; text-align: center; border-bottom: 1px solid #000000; ">Monto</th>
+                                <th style="border: 1px solid #000000; padding: 10px; font-size: 12px;">Nombre Q:.H:.</th>
+                                <th style="border: 1px solid #000000; padding: 10px; text-align: center; font-size: 12px;">Mes Cuota</th>
+                                <th style="border: 1px solid #000000; padding: 10px; text-align: center; font-size: 12px;">Año</th>
+                                <th style="border: 1px solid #000000; padding: 10px; text-align: center; font-size: 12px;">Motivo</th>
+                                <th style="border: 1px solid #000000; padding: 10px; text-align: center; font-size: 12px;">Fecha de Pago</th>
+                                <th style="border: 1px solid #000000; padding: 10px; text-align: center; font-size: 12px;">Monto</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right:1px solid #000000; padding-left: 10px ">' . $row['name'] . ' ' . $row['lastname'] . '</td>
-                                <td style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right:1px solid #000000; text-align: center ">'. $mesCortado .'</td>
-                                <td style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right:1px solid #000000; text-align: center ">' . $row['entrada_Ano'] . '</td>
-                                <td style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right:1px solid #000000; text-align: center ">' . $row['name_Motivo'] . '</td>
-                                <td style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right:1px solid #000000; text-align: center ">'. $fechaFormateada .'</td>
-                                <td style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right:1px solid #000000; text-align: center ">$ '. $montoFormat .'</td>
+                                <td style="border: 1px solid #000000; padding: 10px; font-size: 12px;">' . $row['name'] . ' ' . $row['lastname'] . '</td>
+                                <td style="border: 1px solid #000000; padding: 10px; text-align: center; font-size: 12px;">'. $mesCortado .'</td>
+                                <td style="border: 1px solid #000000; padding: 10px; text-align: center; font-size: 12px;">' . $row['entrada_Ano'] . '</td>
+                                <td style="border: 1px solid #000000; padding: 10px; text-align: center; font-size: 12px;">' . $row['name_Motivo'] . '</td>
+                                <td style="border: 1px solid #000000; padding: 10px; text-align: center; font-size: 12px;">'. $fechaFormateada .'</td>
+                                <td style="border: 1px solid #000000; padding: 10px; text-align: center; font-size: 12px;">$ '. $montoFormat .'</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div style="margin-top: 60px">
+            <div style="margin-top: 30px; padding: 0 20px;">
                 <p>Le agradecemos por su puntualidad y compromiso con las obligaciones financieras de nuestra Logia.</p>
                 <p>Si tiene alguna pregunta o necesita información adicional, no dude en ponerse en contacto con mi persona.</p><br />
                 <p>Un Triple Abrazo Fraternal.</p>

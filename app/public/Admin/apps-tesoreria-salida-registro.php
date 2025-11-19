@@ -61,26 +61,10 @@
                             <form action="controller/registro-salida.php" class="needs-validation mt-4 pt-2" method="post" enctype="multipart/form-data">
 
                                 <div class="row mb-4">
-                                    <label for="id_User" class="col-sm-3 col-form-label">Nombre del QH:.</label>
+                                    <label for="id_User" class="col-sm-3 col-form-label">Registrado por:</label>
                                     <div class="col-sm-5">
-                                        <select name="id_User" id="id_User" class="form-select">
-                                            <?php try {
-                                                $sql = 'SELECT id, name, lastname from users';
-                                                foreach ($link->query($sql) as $rowc) {
-                                                    if ($row['id_User']) {
-                                                        $selected = 'selected="selected"';
-                                                    } else {
-                                                        $selected = '';
-                                                    }
-                                                    ?>
-                                                    <option <?= $selected ?> value="<?= $rowc['id'] ?>"><?= $rowc['name'] ?> <?= $rowc['lastname'] ?></option>
-                                                    <?php
-                                                }
-                                            } catch (PDOException  $e) {
-                                                echo "Error: " . $e;
-                                            }
-                                            ?>
-                                        </select>
+                                        <p class="form-control-plaintext"><?php echo $_SESSION['name'] . ' ' . $_SESSION['lastname']; ?></p>
+                                        <input type="hidden" name="id_User" value="<?php echo $_SESSION['id']; ?>">
                                     </div>
                                 </div>
 
@@ -107,7 +91,7 @@
                                 <div class="row mb-4">
                                     <label for="salida_Ano" class="col-sm-3 col-form-label">Año</label>
                                     <div class="col-sm-5">
-                                        <input type="number" class="form-control" name="salida_Ano" id="salida_Ano" placeholder="Ingrese el año" required>
+                                        <input type="number" class="form-control" name="salida_Ano" id="salida_Ano" placeholder="Ingrese el año" value="<?php echo date('Y'); ?>" required>
                                     </div>
                                 </div>
 
@@ -136,9 +120,13 @@
                                 </div>
 
                                 <div class="row mb-4">
-                                    <label for="salida_MovimientoFecha" class="col-sm-3 col-form-label">Fecha Movimiento</label>
+                                    <label for="salida_MovimientoFecha" class="col-sm-3 col-form-label">Fecha y Hora Movimiento</label>
                                     <div class="col-sm-5">
-                                        <input type="date" class="form-control" name="salida_MovimientoFecha" id="salida_MovimientoFecha"  required>
+                                        <?php
+                                        // Establecer fecha y hora actual del servidor como valor por defecto
+                                        $fechaHoraActual = date('Y-m-d\TH:i');
+                                        ?>
+                                        <input type="datetime-local" class="form-control" name="salida_MovimientoFecha" id="salida_MovimientoFecha" value="<?php echo $fechaHoraActual; ?>" required>
                                     </div>
                                 </div>
 

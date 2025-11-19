@@ -1,5 +1,5 @@
 <?php
-    $language['menu'] = "Menú";
+    $language['Menu'] = "Menú";
     $language['Dashboard'] = "Escritorio";
     $language['Apps'] = "Aplicaciones";
     $language['Calendar'] = "Calendario";
@@ -146,6 +146,7 @@
     $language['Tesoreria'] = 'Tesorería';
     $language['Tesoreria_Entrada'] = 'Registro de Entrada';
     $language['Tesoreria_Salida'] = 'Registro de Salida';
+    $language['Generar_Informe'] = 'Generar Informe'
 
 
 

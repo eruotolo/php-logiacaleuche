@@ -54,7 +54,8 @@
                         <h3>TOTAL ENTRADA DE DINERO</h3>
                         <?php
                         $query ="SELECT SUM(entrada_Monto) AS total_entrada
-                                 FROM entradadinero;";
+                                 FROM entradadinero
+                                 WHERE NOT (id_User = (SELECT id FROM users WHERE username = '270396356') AND entrada_Motivo = 1);";
                         $result_task1 = mysqli_query($link, $query);
                         while ($row = mysqli_fetch_Array($result_task1))  {
                             ?>
@@ -80,7 +81,8 @@
                         <h3>TOTAL EN CAJA</h3>
                         <?php
                         $query ="SELECT
-                                COALESCE((SELECT SUM(COALESCE(entrada_Monto, 0)) FROM entradadinero), 0) -
+                                COALESCE((SELECT SUM(COALESCE(entrada_Monto, 0)) FROM entradadinero
+                                          WHERE NOT (id_User = (SELECT id FROM users WHERE username = '270396356') AND entrada_Motivo = 1)), 0) -
                                 COALESCE((SELECT SUM(COALESCE(salida_Monto, 0)) FROM salidadinero), 0) AS saldo_total;
                             ";
                         $result_task3 = mysqli_query($link, $query);
@@ -88,6 +90,18 @@
                             ?>
                             <h4>$ <?php echo number_format($row['saldo_total'], 0, ',', '.'); ?></h4>
                             <?php
+                        }
+                        ?>
+                    </div>
+                    <div class="style-col col-hosp">
+                        <h3>TOTAL EN CAJA HOSPITALARIO</h3>
+                        <?php
+                        $query = "SELECT SUM(entrada_Monto) AS Total FROM entradadinero WHERE entrada_Motivo = 6";
+                        $result_task5 = mysqli_query($link, $query);
+                        if($result_task5){
+                            $row = mysqli_fetch_Array($result_task5);
+                            $total = $row['Total'];
+                            echo "<h4>$" . number_format($total, 0, ',', '.') . "</h4>";
                         }
                         ?>
                     </div>
@@ -140,12 +154,14 @@
                                 <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
                                     <thead>
                                         <tr>
+                                            <th style="display:none;">ID</th>
                                             <th>Nombre</th>
                                             <th>Mes</th>
                                             <th>Año</th>
                                             <th>Motivo</th>
                                             <th>Fecha del Movimiento</th>
                                             <th>Monto</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -158,12 +174,18 @@
                                     while ($row = mysqli_fetch_Array($result_task))  {
                                         ?>
                                         <tr>
+                                            <td style="display:none;"><?php echo $row['id_Salida'] ?></td>
                                             <td><?php echo $row['name'] ?> <?php echo $row['lastname'] ?></td>
                                             <td><?php echo $row['salida_Mes'] ?></td>
                                             <td><?php echo $row['salida_Ano'] ?></td>
                                             <td><?php echo $row['name_SalidaMotivo'] ?></td>
-                                            <td><?php echo $row['salida_MovimientoFecha'] ?></td>
+                                            <td data-order="<?php echo strtotime($row['salida_MovimientoFecha']); ?>"><?php echo date('d-m-Y H:i', strtotime($row['salida_MovimientoFecha'])); ?></td>
                                             <td>$ <?php echo number_format($row['salida_Monto'], 0, ',', '.'); ?></td>
+                                            <td style="text-align: center">
+                                                <a href="apps-tesoreria-salida-editar.php?id_Salida=<?php echo $row['id_Salida'] ?>" class="text-success" title="Editar">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                         <?php
                                     }
@@ -226,11 +248,18 @@
 				[30, 60, 90, 'All'],
 			], // Define los valores para la opción "Show Entries"
 			responsive: true,
-			order: [[ 4, "desc" ]], //Ordenar por columna Fecha Seguimiento (la 5ta columna)
-			columnDefs: [ {
-				targets: 4, //La columna Fecha Seguimiento
-				type: 'date' // Asignarle el tipo de dato Date
-			} ],
+			order: [[ 5, "desc" ]], //Ordenar por Fecha del Movimiento (columna 5) - más reciente primero
+			columnDefs: [
+				{
+					targets: 0, //La columna ID (oculta)
+					visible: false, // Asegurar que esté oculta
+					searchable: false // No buscar en esta columna
+				},
+				{
+					targets: 5, //La columna Fecha Movimiento (ahora es índice 5 porque agregamos ID)
+					type: 'num' // Tipo numérico porque usamos data-order con timestamp
+				}
+			],
 			buttons: ['copy', 'excel', 'pdf', 'colvis'],
 
 			language: {

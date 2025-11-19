@@ -106,14 +106,17 @@ a{
     border: 0;
     margin-left: 5px;
     margin-right: 5px;
-    width: 32%;
+    width: 24%;
 }
 .style-col > h3{
     color: #FFFFFF;
+    font-size: 25px;
+    height: 62px;
 }
 .style-col > h4{
     color: #FFFFFF;
     font-weight: normal;
+
 }
 .col-salida{
     background-color: #56c0ef;
@@ -121,7 +124,7 @@ a{
     border: 0;
     margin-left: 5px;
     margin-right: 5px;
-    width: 32%;
+    width: 24%;
 }
 .col-total{
     background-color: #f29c13;
@@ -129,5 +132,13 @@ a{
     border: 0;
     margin-left: 5px;
     margin-right: 5px;
-    width: 32%;
+    width: 24%;
+}
+.col-hosp{
+    background-color: #41729D;
+    padding: 30px;
+    border: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 24%;
 }

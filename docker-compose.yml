@@ -1,63 +1,28 @@
-version: "3.8"
-
 networks:
-    my-network:
-        driver: bridge
+  networkDashboard:
+    driver: bridge
 
 services:
-    mysql:
-        image: mariadb:11.2
-        container_name: mariadb-${SITE_NAME}
-        environment:
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-            MARIADB_DATABASE: ${USER_DB_NAME}
-            MYSQL_USER: ${USER_DB_USER}
-            MYSQL_PASSWORD: ${USER_DB_PASSWORD}
-        ports:
-            - "3306:3306"
-        volumes:
-            - ./mysql/mysql-data:/var/lib/mysql
-            - ./mysql/database/caleuche.sql:/docker-entrypoint-initdb.d/dump_file.sql
-        networks:
-            - my-network
+  postgres:
+    image: "postgres:16-alpine"
+    container_name: nextjs-prisma-dashboard
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./postgres-data:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=logiacaleuche
+    networks:
+      - networkDashboard
 
-    phpmyadmin:
-        image: phpmyadmin:5.2.1
-        container_name: phpmyadmin-${SITE_NAME}
-        ports:
-            - "8080:80"
-        environment:
-            PMA_HOST: ${MYSQL_DB_HOST}
-            PMA_USER: ${MYSQL_ROOT_USERNAME}
-            PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-            PMA_ARBITRARY: 1
-        networks:
-            - my-network
-
-    php:
-        build:
-            context: .
-            dockerfile: Dockerfile
-        container_name: php-${SITE_NAME}
-        ports:
-            - "9000:9000"
-        volumes:
-            - ./app/public:/var/www/html/
-            - ./php/php.ini:/usr/local/etc/php/php.ini:ro
-        environment:
-            TZ: America/Santiago  # Set your desired time zone here
-        networks:
-            - my-network
-
-    nginx:
-        image: nginx:1.25.3-alpine
-        container_name: nginx-${SITE_NAME}
-        ports:
-            - "8081:80"
-        volumes:
-            - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-            - ./app/public:/var/www/html/
-        depends_on:
-            - php
-        networks:
-            - my-network
+  adminer:
+    image: "adminer:latest"
+    container_name: nextjs-adminer-dashboard
+    ports:
+      - "8080:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=postgres
+    networks:
+      - networkDashboard
