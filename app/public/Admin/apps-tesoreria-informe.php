@@ -518,11 +518,14 @@ function formatearMesConNumero($mes) {
 
                 <!-- Contenedor para el informe generado -->
                 <?php if (!empty($informe_html)): ?>
-                    <!-- Botón de descarga como imagen -->
+                    <!-- Botones de descarga -->
                     <div class="row mb-3">
                         <div class="col-12 text-end">
+                            <button id="btn-descargar-pdf" class="btn btn-danger me-2">
+                                <i class="mdi mdi-file-pdf me-1"></i> Descargar como PDF
+                            </button>
                             <button id="btn-descargar-informe" class="btn btn-success">
-                                <i class="mdi mdi-download me-1"></i> Descargar como Imagen
+                                <i class="mdi mdi-image me-1"></i> Descargar como Imagen
                             </button>
                         </div>
                     </div>
@@ -549,6 +552,8 @@ function formatearMesConNumero($mes) {
 
 <!-- html2canvas para captura de pantalla -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<!-- jsPDF para generación de PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script src="assets/js/app.js"></script>
 
@@ -624,6 +629,79 @@ function formatearMesConNumero($mes) {
                 // Restaurar botón
                 btnDescargar.innerHTML = textoOriginal;
                 btnDescargar.disabled = false;
+            });
+        });
+
+    }
+
+    // Verificar si el botón PDF existe antes de agregar el evento
+    const btnDescargarPDF = document.getElementById('btn-descargar-pdf');
+    if (btnDescargarPDF) {
+        btnDescargarPDF.addEventListener('click', function() {
+            // Mostrar indicador de carga
+            const textoOriginal = this.innerHTML;
+            this.innerHTML = '<i class="mdi mdi-loading mdi-spin me-1"></i> Generando PDF...';
+            this.disabled = true;
+
+            // Importar jsPDF
+            const { jsPDF } = window.jspdf;
+
+            // Capturar el contenedor del informe
+            html2canvas(document.getElementById('informe-tesoreria-contenedor'), {
+                scale: 2, // Alta calidad
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff'
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                
+                // Dimensiones del PDF (A4)
+                const pdfWidth = 210; // mm
+                const pdfHeight = 297; // mm
+                
+                // Calcular dimensiones de la imagen en el PDF
+                const imgProps = canvas.width / canvas.height;
+                const pdfImgWidth = pdfWidth;
+                const pdfImgHeight = pdfImgWidth / imgProps;
+                
+                // Crear PDF
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                
+                // Si la imagen es más alta que una página A4, necesitamos manejar múltiples páginas
+                // Pero para simplificar en este caso y mantener el diseño como "imagen", 
+                // ajustaremos la altura si es necesario o permitiremos que se corte si es muy largo,
+                // o mejor: creamos un PDF con altura personalizada si es muy largo.
+                
+                // Opción: Altura dinámica si es muy largo, o A4 estándar escalado
+                // Vamos a usar altura dinámica si el contenido excede A4 para que no se corte mal visualmente
+                // O mejor, ajustamos al ancho y dejamos que ocupe lo que ocupe verticalmente en una sola página larga
+                // para simular un reporte continuo.
+                
+                // Sin embargo, lo más compatible es A4 y paginar. 
+                // Dado que es un reporte "como imagen", haremos que encaje en el ancho A4.
+                
+                // Si la altura calculada es mayor a A4 (297mm), creamos un PDF con altura personalizada
+                if (pdfImgHeight > pdfHeight) {
+                    const longPdf = new jsPDF('p', 'mm', [pdfWidth, pdfImgHeight]);
+                    longPdf.addImage(imgData, 'PNG', 0, 0, pdfImgWidth, pdfImgHeight);
+                    const fechaHora = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+                    longPdf.save('informe-tesoreria-' + fechaHora + '.pdf');
+                } else {
+                    pdf.addImage(imgData, 'PNG', 0, 0, pdfImgWidth, pdfImgHeight);
+                    const fechaHora = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+                    pdf.save('informe-tesoreria-' + fechaHora + '.pdf');
+                }
+
+                // Restaurar botón
+                btnDescargarPDF.innerHTML = textoOriginal;
+                btnDescargarPDF.disabled = false;
+            }).catch(error => {
+                console.error('Error al generar el PDF:', error);
+                alert('Error al generar el PDF. Por favor, intente nuevamente.');
+
+                // Restaurar botón
+                btnDescargarPDF.innerHTML = textoOriginal;
+                btnDescargarPDF.disabled = false;
             });
         });
     }
