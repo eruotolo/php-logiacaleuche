@@ -30,7 +30,7 @@
         <div style="border: 1px solid #000000;width: 850px; height: 320px">
             <div style="display: flex; justify-content: space-between; ">
                 <div style="width: 200px; padding: 20px">
-                    <img src="https://intranet.logiacaleuche.cl/Admin/assets/images/logo.jpg" style="width: 160px; height: 160px" alt="Logo">
+                    <img src="https://intranet.logiacaleuche.cl/admin/assets/images/logo.jpg" style="width: 160px; height: 160px" alt="Logo">
                 </div>
                 <div style="width: 600px; padding: 20px">
                     <p style="text-align: right; font-size: 16px; font-weight: bold">Boleta N° ' . $id_Entrada . '</p>

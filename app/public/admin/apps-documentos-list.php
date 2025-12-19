@@ -122,7 +122,7 @@
                                             <?php
                                             if ($_SESSION['category'] == 2 || $_SESSION['username'] == '270396356'){
                                                 ?>
-                                                <li><a class="dropdown-item" href="../Admin/controller/document-remove.php?id_Doc=<?php echo $row['id_Doc'] ?>">Eliminar</a></li>
+                                                <li><a class="dropdown-item" href="../admin/controller/document-remove.php?id_Doc=<?php echo $row['id_Doc'] ?>">Eliminar</a></li>
                                                 <?php
                                             } else{
                                                 ?>

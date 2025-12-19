@@ -48,7 +48,7 @@ if(isset($_GET['id_Entrada'])){
             <div style="max-width: 840px; width: 100%; margin: 0 auto; border: 1px solid #000000; box-sizing: border-box;">
                 <div style="display: block;">
                     <div style="width: 100%; padding: 20px; box-sizing: border-box; text-align: center;">
-                        <img src="https://intranet.logiacaleuche.cl/Admin/assets/images/logo.jpg" style="max-width: 160px; width: 100%; height: auto;" alt="Logo">
+                        <img src="https://intranet.logiacaleuche.cl/admin/assets/images/logo.jpg" style="max-width: 160px; width: 100%; height: auto;" alt="Logo">
                     </div>
                     <div style="width: 100%; padding: 0 20px 20px 20px; box-sizing: border-box;">
                         <p style="text-align: right; font-size: 16px; font-weight: 600; margin-top: 1px;margin-bottom: 10px;">Boleta N° ' . $id_Entrada . '</p>

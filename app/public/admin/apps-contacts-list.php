@@ -132,7 +132,7 @@
                                 <td>
 
 
-                                    <a href="../Admin/apps-contacts-profile-view.php?id=<?php echo $row['uid'] ?>" class="text-body"><img src="uploads/usuarios/<?php echo $row['image']?>" alt="" class="avatar-md rounded-circle me-2"></a>
+                                    <a href="../admin/apps-contacts-profile-view.php?id=<?php echo $row['uid'] ?>" class="text-body"><img src="uploads/usuarios/<?php echo $row['image']?>" alt="" class="avatar-md rounded-circle me-2"></a>
                                 </td>
                                 <td><?php echo $row['name'] ?> <?php echo $row['lastname'] ?></td>
                                 <td><?php echo $row['useremail'] ?></td>
@@ -144,12 +144,12 @@
                                             <i class="bx bx-dots-horizontal-rounded"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item" href="../Admin/apps-contacts-profile-view.php?id=<?php echo $row['uid'] ?>">Ver</a></li>
+                                            <li><a class="dropdown-item" href="../admin/apps-contacts-profile-view.php?id=<?php echo $row['uid'] ?>">Ver</a></li>
 
                                             <?php
                                                 if ($_SESSION['category'] == 2 || $_SESSION['username'] == '270396356'){
                                             ?>
-                                            <li><a class="dropdown-item" href="../Admin/apps-contacts-profile-edit.php?id=<?php echo $row['uid'] ?>">Editar</a></li>
+                                            <li><a class="dropdown-item" href="../admin/apps-contacts-profile-edit.php?id=<?php echo $row['uid'] ?>">Editar</a></li>
                                             <li><a class="dropdown-item" href="controller/usuario-down.php?id_user=<?php echo $row['uid'] ?>">Inactivar</a></li>
                                             <li><a class="dropdown-item" href="controller/usuario-passdefault.php?id_user=<?php echo $row['uid'] ?>">Reset Password</a></li>
                                             <?php

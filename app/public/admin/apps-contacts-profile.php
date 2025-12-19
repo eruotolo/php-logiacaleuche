@@ -410,7 +410,7 @@
                                                                 </button>
                                                                 <ul class="dropdown-menu dropdown-menu-end">
                                                                     <li><a class="dropdown-item" href="apps-blog-detail.php?id_Feed=<?php echo $row['id_Feed'] ?>">Ver</a></li>
-                                                                    <li><a class="dropdown-item" href="../Admin/controller/feed-remove.php?id_Feed=<?php echo $row['id_Feed'] ?>">Eliminar</a></li>
+                                                                    <li><a class="dropdown-item" href="../admin/controller/feed-remove.php?id_Feed=<?php echo $row['id_Feed'] ?>">Eliminar</a></li>
                                                                 </ul>
                                                             </div>
                                                         </td>

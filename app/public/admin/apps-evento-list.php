@@ -143,7 +143,7 @@
                                                 if ($_SESSION['category'] == 2 || $_SESSION['username'] == '270396356') {
                                                     ?>
                                                     <li><a class="dropdown-item"
-                                                           href="../Admin/controller/evento-remove.php?id_Evento=<?php echo $row['id_Evento'] ?>">Eliminar</a>
+                                                           href="../admin/controller/evento-remove.php?id_Evento=<?php echo $row['id_Evento'] ?>">Eliminar</a>
                                                     </li>
                                                     <?php
                                                 } else {
@@ -216,7 +216,7 @@
                                                 if ($_SESSION['category'] == 2 || $_SESSION['username'] == '270396356') {
                                                     ?>
                                                     <li><a class="dropdown-item"
-                                                           href="../Admin/controller/evento-remove.php?id_Evento=<?php echo $row['id_Evento'] ?>">Eliminar</a>
+                                                           href="../admin/controller/evento-remove.php?id_Evento=<?php echo $row['id_Evento'] ?>">Eliminar</a>
                                                     </li>
                                                     <?php
                                                 } else {
@@ -285,7 +285,7 @@
                                                 if ($_SESSION['category'] == 2 || $_SESSION['username'] == '270396356') {
                                                     ?>
                                                     <li><a class="dropdown-item"
-                                                           href="../Admin/controller/evento-remove.php?id_Evento=<?php echo $row['id_Evento'] ?>">Eliminar</a>
+                                                           href="../admin/controller/evento-remove.php?id_Evento=<?php echo $row['id_Evento'] ?>">Eliminar</a>
                                                     </li>
                                                     <?php
                                                 } else {

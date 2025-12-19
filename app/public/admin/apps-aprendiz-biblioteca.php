@@ -132,7 +132,7 @@
                                             <?php
                                             if ($_SESSION['category'] == 2 || $_SESSION['username'] == '270396356'){
                                                 ?>
-                                                <li><a class="dropdown-item" href="../Admin/controller/libro-remove.php?id_Libro=<?php echo $row['id_Libro'] ?>">Eliminar</a></li>
+                                                <li><a class="dropdown-item" href="../admin/controller/libro-remove.php?id_Libro=<?php echo $row['id_Libro'] ?>">Eliminar</a></li>
                                                 <?php
                                             } else{
                                                 ?>

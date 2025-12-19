@@ -135,13 +135,13 @@
                                         <i class="bx bx-dots-horizontal-rounded"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end">
-                                        <li><a class="dropdown-item" href="../Admin/apps-boletin-view.php?id_Boletin=<?php echo $row['id_Boletin'] ?>">Ver</a></li>
+                                        <li><a class="dropdown-item" href="../admin/apps-boletin-view.php?id_Boletin=<?php echo $row['id_Boletin'] ?>">Ver</a></li>
 
                                         <?php
                                         if ($_SESSION['category'] == 2 || $_SESSION['username'] == '270396356'){
                                             ?>
-                                            <li><a class="dropdown-item" href="../Admin/apps-boletin-edit.php?id_Boletin=<?php echo $row['id_Boletin'] ?>">Editar</a></li>
-                                            <li><a class="dropdown-item" href="../Admin/controller/boletin-remove.php?id_Boletin=<?php echo $row['id_Boletin'] ?>">Eliminar</a></li>
+                                            <li><a class="dropdown-item" href="../admin/apps-boletin-edit.php?id_Boletin=<?php echo $row['id_Boletin'] ?>">Editar</a></li>
+                                            <li><a class="dropdown-item" href="../admin/controller/boletin-remove.php?id_Boletin=<?php echo $row['id_Boletin'] ?>">Eliminar</a></li>
                                             <?php
                                         } else{
                                             ?>

@@ -118,7 +118,7 @@
                                 </th>
 
                                 <td>
-                                    <a href="../Admin/apps-news-edit.php?id=<?php echo $row['id_Feed'] ?>" class="text-body"><?php echo $row['titulo_Feed'] ?></a>
+                                    <a href="../admin/apps-news-edit.php?id=<?php echo $row['id_Feed'] ?>" class="text-body"><?php echo $row['titulo_Feed'] ?></a>
                                 </td>
 
                                 <td><?php echo $row['nombre_Category'] ?></td>
@@ -141,7 +141,7 @@
                                             <?php
                                             if ($_SESSION['category'] == 2 || $_SESSION['username'] == '270396356'){
                                                 ?>
-                                                <li><a class="dropdown-item" href="../Admin/controller/feed-remove.php?id_Feed=<?php echo $row['id_Feed'] ?>">Eliminar</a></li>
+                                                <li><a class="dropdown-item" href="../admin/controller/feed-remove.php?id_Feed=<?php echo $row['id_Feed'] ?>">Eliminar</a></li>
                                                 <?php
                                             } else{
                                                 ?>
