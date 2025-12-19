@@ -1,0 +1,48 @@
+name: 🚀 Deploy a cPanel vía FTP
+
+on:
+    push:
+        branches: [ main ]  # Cambia si tu rama principal es otra
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: 🚚 Checkout código
+              uses: actions/checkout@v4
+
+            - name: 🛠️ Configurar Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  cache: 'pnpm'
+
+            -   name: ⚙️ Activar Corepack y pnpm
+                run: corepack enable && corepack prepare pnpm@latest --activate
+
+            - name: 📦 Instalar dependencias (pnpm)
+              run: pnpm install --frozen-lockfile
+
+            - name: 🔨 Build Tailwind producción
+              run: pnpm tailwind:build   # Asegúrate de tener este script en package.json
+
+            - name: 📂 Deploy vía FTP
+              uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+              with:
+                  server: ${{ secrets.FTP_SERVER }}
+                  username: ${{ secrets.FTP_USERNAME }}
+                  password: ${{ secrets.FTP_PASSWORD }}
+                  port: ${{ secrets.FTP_PORT }}
+                  protocol: ftp                  # Si falla conexión, cambia a 'ftps'
+                  local-dir: app/public/
+                  server-dir: /public_html/      # Confirma que sea exactamente esta ruta
+                  exclude: |
+                      **/.git**
+                      **/.github/**
+                      **/node_modules/**
+                      **/src/**
+                      **/.prettierrc.json**
+                      **/package.json**
+                      **/pnpm-lock.yaml**
+                      **/tailwind.config.js**
+                      # Agrega más si tienes .env, carpetas de logs, etc.
