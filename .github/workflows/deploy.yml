@@ -3,34 +3,14 @@ name: 🚀 Deploy a cPanel vía FTP
 on:
     push:
         branches: [ master, main ]
-    workflow_dispatch:   # Te permite ejecutar manualmente desde GitHub
+    workflow_dispatch:
 
 jobs:
-    build-and-deploy:
+    deploy:
         runs-on: ubuntu-latest
         steps:
             - name: 🚚 Checkout código
               uses: actions/checkout@v4
-
-            - name: ⚙️ Instalar pnpm (acción oficial)
-              uses: pnpm/action-setup@v4
-              with:
-                  version: latest   # Siempre la versión más reciente
-
-            - name: 🛠️ Configurar Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: '20'
-                  cache: 'pnpm'
-                  cache-dependency-path: 'app/pnpm-lock.yaml'
-
-            - name: 📦 Instalar dependencias
-              working-directory: ./app
-              run: pnpm install --frozen-lockfile
-
-            - name: 🔨 Build Tailwind producción
-              working-directory: ./app
-              run: pnpm minify
 
             - name: 📂 Deploy vía FTP
               uses: SamKirkland/FTP-Deploy-Action@v4.3.6
@@ -39,15 +19,11 @@ jobs:
                   username: ${{ secrets.FTP_USERNAME }}
                   password: ${{ secrets.FTP_PASSWORD }}
                   port: ${{ secrets.FTP_PORT }}
-                  protocol: ftps               # Recomendado (más seguro). Si falla, cambia a ftp
-                  local-dir: app/public/       # Solo sube lo que va al sitio
-                  server-dir: /public_html/
+                  protocol: ftp
+                  local-dir: app/public/
+                  server-dir: /
                   exclude: |
                       **/.git**
                       **/.github/**
                       **/node_modules/**
-                      **/src/**
-                      **/.prettierrc.json**
-                      **/package.json**
-                      **/pnpm-lock.yaml**
-                      **/tailwind.config.js**
+
