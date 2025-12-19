@@ -30,7 +30,7 @@ jobs:
 
             - name: 🔨 Build Tailwind producción
               working-directory: ./app
-              run: pnpm tailwind:build
+              run: pnpm minify
 
             - name: 📂 Deploy vía FTP
               uses: SamKirkland/FTP-Deploy-Action@v4.3.6
