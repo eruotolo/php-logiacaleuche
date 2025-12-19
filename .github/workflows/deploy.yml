@@ -2,7 +2,8 @@ name: 🚀 Deploy a cPanel vía FTP
 
 on:
     push:
-        branches: [ master, main ]  # Cambia si tu rama principal es otra
+        branches: [ master, main ]     # Cubre ambas ramas por si cambias en el futuro
+    workflow_dispatch:              # Permite ejecutar el workflow manualmente desde GitHub
 
 jobs:
     build-and-deploy:
@@ -15,16 +16,18 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: '20'
-                  cache: 'pnpm'
+                  cache: 'pnpm'               # Acelera instalaciones futuras
 
-            -   name: ⚙️ Activar Corepack y pnpm
-                run: corepack enable && corepack prepare pnpm@latest --activate
+            - name: ⚙️ Instalar pnpm (acción oficial)
+              uses: pnpm/action-setup@v4
+              with:
+                  version: latest             # Siempre la versión más reciente y estable
 
-            - name: 📦 Instalar dependencias (pnpm)
+            - name: 📦 Instalar dependencias
               run: pnpm install --frozen-lockfile
 
             - name: 🔨 Build Tailwind producción
-              run: pnpm tailwind:build   # Asegúrate de tener este script en package.json
+              run: pnpm tailwind:build      # Asegúrate de tener este script en package.json
 
             - name: 📂 Deploy vía FTP
               uses: SamKirkland/FTP-Deploy-Action@v4.3.6
@@ -33,9 +36,9 @@ jobs:
                   username: ${{ secrets.FTP_USERNAME }}
                   password: ${{ secrets.FTP_PASSWORD }}
                   port: ${{ secrets.FTP_PORT }}
-                  protocol: ftp                  # Si falla conexión, cambia a 'ftps'
-                  local-dir: app/public/
-                  server-dir: /public_html/      # Confirma que sea exactamente esta ruta
+                  protocol: ftps                # Recomendado: más seguro y común en hostings chilenos
+                  local-dir: app/public/        # Solo sube lo necesario (tu carpeta de producción)
+                  server-dir: /public_html/     # Ruta exacta en cPanel
                   exclude: |
                       **/.git**
                       **/.github/**
@@ -45,4 +48,4 @@ jobs:
                       **/package.json**
                       **/pnpm-lock.yaml**
                       **/tailwind.config.js**
-                      # Agrega más si tienes .env, carpetas de logs, etc.
+                      # Agrega aquí más archivos/carpetas que no quieras subir (ej. .env)
