@@ -2,7 +2,7 @@ name: 🚀 Deploy a cPanel vía FTP
 
 on:
     push:
-        branches: [ main ]  # Cambia si tu rama principal es otra
+        branches: [ master, main ]  # Cambia si tu rama principal es otra
 
 jobs:
     build-and-deploy:
