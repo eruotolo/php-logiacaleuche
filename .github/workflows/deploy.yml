@@ -12,21 +12,23 @@ jobs:
             - name: 🚚 Checkout código
               uses: actions/checkout@v4
 
+            - name: ⚙️ Instalar pnpm (acción oficial)
+              uses: pnpm/action-setup@v4
+              with:
+                  version: latest   # Siempre la versión más reciente
+
             - name: 🛠️ Configurar Node.js
               uses: actions/setup-node@v4
               with:
                   node-version: '20'
                   cache: 'pnpm'   # Cachea node_modules y pnpm store para ir más rápido
 
-            - name: ⚙️ Instalar pnpm (acción oficial)
-              uses: pnpm/action-setup@v4
-              with:
-                  version: latest   # Siempre la versión más reciente
-
             - name: 📦 Instalar dependencias
+              working-directory: ./app
               run: pnpm install --frozen-lockfile
 
             - name: 🔨 Build Tailwind producción
+              working-directory: ./app
               run: pnpm tailwind:build
 
             - name: 📂 Deploy vía FTP
