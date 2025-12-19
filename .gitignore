@@ -5,3 +5,5 @@ nginx
 mysql
 .claude
 php
+node_modules
+.DS_Store
