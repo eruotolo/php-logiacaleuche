@@ -41,7 +41,7 @@
                                         </form>
 
                                         <div class="mt-5 text-center">
-                                            <p class="text-muted mb-0">Remember It ?  <a href="../auth-login.php"
+                                            <p class="text-muted mb-0">Remember It ?  <a href="../admin/auth-login.php"
                                                     class="text-primary fw-semibold"> Sign In </a> </p>
                                         </div>
                                     </div>
