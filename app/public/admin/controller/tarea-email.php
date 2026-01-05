@@ -56,16 +56,19 @@ try {
         Fraternalmente,
         <br>
         Tesorería R:. L:. Caleuche 250<br>
-        Q:.H:. Tesorero. Edgardo Ruotolo Cardozo<br>
+        Q:.H:. Tesorero. Pedro Jovino Bravo Crisostomo<br>
+        Q:.H:. Tesorero Adjunto. Edgardo Ruotolo Cardozo<br>
         Email: edgardoruotolo@gmail.com<br>
         Tel: +56 9 6755 3841<br>
        
     ');
 
     $mail->send();
-    echo 'El mensaje ha sido enviado';
+    //echo 'El mensaje ha sido enviado';
+    header("Location: ../apps-tesoreria-entrada.php?msg=sent");
 } catch (Exception $e) {
-    echo "El mensaje no pudo ser enviado. Error de correo: {$mail->ErrorInfo}";
+    //echo "El mensaje no pudo ser enviado. Error de correo: {$mail->ErrorInfo}";
+    header("Location: ../apps-tesoreria-entrada.php?error=" . urlencode($mail->ErrorInfo));
 }
 
 // Liberar los resultados de la memoria

@@ -124,6 +124,7 @@
                                 <div>
                                     <a href="apps-tesoreria-entrada-registro.php" class="btn btn-light"><i class="bx bx-plus me-1"></i> Registrar Entrada</a>
                                     <a href="apps-tesoreria-salida-registro.php" class="btn btn-light"><i class="bx bx-plus me-1"></i> Registrar Salida</a>
+                                    <a href="controller/tarea-email.php" class="btn btn-primary"><i class="bx bx-envelope me-1"></i> Recordatorio Pago</a>
                                 </div>
                                 <?php
                             } else{
@@ -290,6 +291,14 @@
 
 		$('.dataTables_length select').addClass('form-select form-select-sm');
 	});
+
+    // Check for URL parameters for alerts
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('msg') && urlParams.get('msg') === 'sent') {
+        alert('Recordatorio de pago enviado correctamente a todos los usuarios.');
+    } else if (urlParams.has('error')) {
+        alert('Error al enviar el recordatorio: ' + urlParams.get('error'));
+    }
 
 </script>
 
