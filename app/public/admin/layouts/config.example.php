@@ -37,8 +37,8 @@ $gmailusername = 'tu_usuario@gmail.com'; // YOUR email username
 
 // Configuración SMTP Centralizada
 $smtp_host = 'smtp-relay.brevo.com';
-$smtp_port = 587;
-$smtp_secure = 'tls';
+$smtp_port = 465;
+$smtp_secure = 'ssl';
 $smtp_username = $gmailusername;
 $smtp_password = $gmailpassword;
 $smtp_from_email = $gmailid;
