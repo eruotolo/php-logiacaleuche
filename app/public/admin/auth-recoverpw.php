@@ -36,16 +36,16 @@ if (isset($_POST['submit'])) {
             // Server settings
             // $mail->SMTPDebug = SMTP::DEBUG_SERVER; // for detailed debug output
             $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
+            $mail->Host = $smtp_host;
             $mail->SMTPAuth = true;
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
+            $mail->SMTPSecure = $smtp_secure;
+            $mail->Port = $smtp_port;
 
-            $mail->Username = $gmailid;
-            $mail->Password = $gmailpassword;
+            $mail->Username = $smtp_username;
+            $mail->Password = $smtp_password;
 
             // Sender and recipient settings
-            $mail->setFrom($gmailid, $gmailusername);
+            $mail->setFrom($smtp_from_email, $smtp_from_name);
             $mail->addAddress($useremail, $username);
             $mail->addReplyTo($gmailid, $gmailusername); // to set the reply to
 

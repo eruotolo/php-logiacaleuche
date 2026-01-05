@@ -13,12 +13,12 @@ $result = $link->query("SELECT useremail FROM users");
 
 $mail->SMTPDebug = 0;
 $mail->isSMTP();
-$mail->Host =  'smtp-relay.brevo.com';
+$mail->Host = $smtp_host;
 $mail->SMTPAuth = true;
-$mail->Username = $gmailusername;
-$mail->Password = $gmailpassword;
-$mail->SMTPSecure = 'tls';
-$mail->Port = 587;
+$mail->Username = $smtp_username;
+$mail->Password = $smtp_password;
+$mail->SMTPSecure = $smtp_secure;
+$mail->Port = $smtp_port;
 
 // Recorre cada fila de la consulta
 while ($row = $result->fetch_assoc()) {
@@ -32,8 +32,7 @@ while ($row = $result->fetch_assoc()) {
 try {
 
     // Recipientes
-    $mail->setFrom($gmailid, 'Tesoreria R:. L:. Caleuche 250');
-    ;
+    $mail->setFrom($smtp_from_email, $smtp_from_name);
     // Contenido
     $mail->isHTML(true);
     $mail->Subject = 'Recordatorio de Pago de Cuotas Logiales';

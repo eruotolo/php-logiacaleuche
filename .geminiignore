@@ -1,0 +1,10 @@
+# Imágenes
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.svg
+*.webp
+
+# Documentos
+*.pdf

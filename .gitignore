@@ -8,6 +8,6 @@ php
 .DS_Store
 
 # Archivos de configuración con credenciales sensibles
-app/public/Admin/layouts/config.php
+app/public/admin/layouts/config.php
 **/config.php
 

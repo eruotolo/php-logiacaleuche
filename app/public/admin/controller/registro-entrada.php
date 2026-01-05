@@ -54,15 +54,15 @@ if(isset($_POST['crear'])) {
             // Configuración del servidor
             $mail->SMTPDebug = 0;
             $mail->isSMTP();
-            $mail->Host = 'smtp-relay.brevo.com';
+            $mail->Host = $smtp_host;
             $mail->SMTPAuth = true;
-            $mail->Username = $gmailusername;
-            $mail->Password = $gmailpassword;
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
+            $mail->Username = $smtp_username;
+            $mail->Password = $smtp_password;
+            $mail->SMTPSecure = $smtp_secure;
+            $mail->Port = $smtp_port;
 
             // Recipientes
-            $mail->setFrom($gmailid, 'Tesoreria R:. L:. Caleuche 250');
+            $mail->setFrom($smtp_from_email, $smtp_from_name);
             $mail->addAddress($row['useremail'], $row['name'] . ' ' . $row['lastname']);
 
             // Contenido
