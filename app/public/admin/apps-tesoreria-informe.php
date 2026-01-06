@@ -88,6 +88,11 @@ function formatearMesConNumero($mes) {
                     $fecha_desde = $_POST['fecha_desde'] ?? null;
                     $fecha_hasta = $_POST['fecha_hasta'] ?? date('Y-m-d');
 
+                    // Si es informe personalizado, extraer el año de la fecha_hasta para el estado de cuotas
+                    if ($tipo_informe == 'personalizado' && !empty($fecha_hasta)) {
+                        $ano = date('Y', strtotime($fecha_hasta));
+                    }
+
                     $titulo_informe = '';
                     $periodo = '';
                     $where_ingresos = '';
@@ -219,7 +224,7 @@ function formatearMesConNumero($mes) {
                         u.name,
                         u.lastname,
                         u.created_at,
-                        GROUP_CONCAT(DISTINCT e.entrada_Mes ORDER BY FIELD(e.entrada_Mes, 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre') SEPARATOR ',') as meses_pagados_texto,
+                        GROUP_CONCAT(DISTINCT e.entrada_Mes ORDER BY FIELD(e.entrada_Mes, '01 - Enero', '02 - Febrero', '03 - Marzo', '04 - Abril', '05 - Mayo', '06 - Junio', '07 - Julio', '08 - Agosto', '09 - Septiembre', '10 - Octubre', '11 - Noviembre', '12 - Diciembre') SEPARATOR ',') as meses_pagados_texto,
                         COUNT(DISTINCT e.entrada_Mes) as cantidad_meses_pagados
                     FROM users u
                     LEFT JOIN entradadinero e ON u.id = e.id_User
@@ -232,9 +237,17 @@ function formatearMesConNumero($mes) {
                     $result_deudas = mysqli_query($link, $query_deudas);
                     $deudas_data = [];
 
+                    // DEBUG: Verificar si la consulta funcionó
+                    if (!$result_deudas) {
+                        echo "<!-- DEBUG ERROR: " . mysqli_error($link) . " -->";
+                    }
+
                     while ($row = mysqli_fetch_assoc($result_deudas)) {
                         $username = intval($row['username']);
                         $cuota_mensual = getCuotaMensual($username);
+
+                        // DEBUG: Mostrar meses pagados de cada usuario
+                        // echo "<!-- DEBUG: Usuario " . $row['name'] . ": meses_pagados_texto = '" . ($row['meses_pagados_texto'] ?? 'NULL') . "' -->";
 
                         // Array de todos los meses del año (referencia)
                         $todos_los_meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
@@ -421,6 +434,7 @@ function formatearMesConNumero($mes) {
 
                                     <!-- Sección de Estado de Cuotas -->
                                     <div class="p-3 mt-4" style="background-color: #fff3cd; border-radius: 5px;">
+                                        <!-- DEBUG: Año seleccionado = <?php echo $ano_reporte; ?>, Tipo informe = <?php echo $tipo_informe; ?> -->
                                         <h2 style="color: #333; font-size: 22px; margin: 0 0 20px 0; border-bottom: 3px solid #ffc107; padding-bottom: 10px;">💳 ESTADO DE CUOTAS <?php echo $ano_reporte; ?></h2>
                                         <div class="table-responsive">
                                             <table class="table table-bordered table-striped table-hover">
