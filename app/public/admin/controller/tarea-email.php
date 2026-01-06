@@ -37,30 +37,23 @@ try {
     $mail->isHTML(true);
     $mail->Subject = 'Recordatorio de Pago de Cuotas Logiales';
     $mail->Body    = utf8_decode('
-        Estimados Q:.H:.,<br>
+        Estimados QQ:.HH:.,<br>
         <br>
-        Espero que se encuentre bien y con ánimo en sus trabajos masónicos.<br>
+        Junto con saludarles fraternalmente, nos dirigimos a ustedes para recordarles la importancia de mantener al día el pago de sus cuotas logiales.<br>
         <br>
-        Nos dirigimos a usted para recordarle la importancia de mantenerse al día con las cuotas de la Logia. Como saben, el compromiso de cada uno de nosotros con la Logia es fundamental para el sostenimiento y funcionamiento adecuado de nuestras actividades y proyectos.<br>
+        Como es de su conocimiento, el compromiso de cada uno de nosotros es vital para el correcto sostenimiento de nuestro Taller, permitiéndonos cumplir con nuestras actividades, proyectos y obligaciones institucionales ante la Gran Logia.<br>
         <br>
-        La cuota mensual es vital para asegurar que nuestra Logia pueda cumplir con sus responsabilidades financieras, incluyendo las contribuciones a la Gran Logia que son esenciales para el mantenimiento y prosperidad de nuestra institución a nivel superior.<br>
+        Les invitamos a regularizar su situación financiera a la brevedad posible. En caso de presentar alguna dificultad o tener dudas sobre sus saldos, les solicitamos ponerse en contacto directo con la Tesorería para buscar, en conjunto, la mejor solución.<br>
         <br>
-        Si por alguna razón tienen pendiente alguna cuota, les invitamos a que procedan a regularizar su situación a la mayor brevedad posible. Esto nos permitirá continuar con nuestra labor de manera efectiva y sin contratiempos.<br>
+        Agradecemos de antemano su fraternidad y compromiso constante con nuestra querida Logia.<br>
         <br>
-        Entendemos que pueden surgir circunstancias que dificulten el pago puntual, por lo que les pedimos que, en caso de tener algún problema, se acerquen a al Tesorero para buscar una solución adecuada.<br>
+        Reciban un fuerte y fraternal abrazo.<br>
         <br>
-        Agradecemos de antemano su comprensión y colaboración en este asunto tan importante para todos nosotros. Juntos podemos asegurar el éxito y el crecimiento de nuestra querida Logia.<br>
-        <br>
-        Cualquier consulta o aclaración, no duden en comunicarse con mi persona.<br>
-        <br>
-        Fraternalmente,
-        <br>
-        Tesorería R:. L:. Caleuche 250<br>
+        <b>Tesorería R:. L:. Caleuche 250</b><br>
         Q:.H:. Tesorero. Pedro Jovino Bravo Crisostomo<br>
         Q:.H:. Tesorero Adjunto. Edgardo Ruotolo Cardozo<br>
         Email: edgardoruotolo@gmail.com<br>
         Tel: +56 9 6755 3841<br>
-       
     ');
 
     $mail->send();

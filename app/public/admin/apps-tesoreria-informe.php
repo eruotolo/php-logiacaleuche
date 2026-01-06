@@ -209,8 +209,8 @@ function formatearMesConNumero($mes) {
                     $top_egresos = [];
                     while ($row = mysqli_fetch_assoc($result_top_egresos)) { $top_egresos[] = $row; }
 
-                    // Consulta para estado de cuotas del año en curso
-                    $ano_reporte = date('Y');
+                    // Consulta para estado de cuotas del año seleccionado
+                    $ano_reporte = $ano; // Usar el año del formulario
                     $meses_del_ano = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
                     $query_deudas = "SELECT
@@ -347,15 +347,15 @@ function formatearMesConNumero($mes) {
                                             <!-- Total Ingreso -->
                                             <div class="col-lg-6 col-md-6 mb-3">
                                                 <div style="padding: 20px; background-color: #d4edda; border-radius: 8px; border-left: 5px solid #28a745; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                                    <div style="font-size: 14px; color: #155724; margin-bottom: 8px; font-weight: 600;">💰 Total Ingreso</div>
-                                                    <div style="font-size: 32px; font-weight: bold; color: #28a745;">$<?php echo number_format($total_ingresos_historico, 0, ',', '.'); ?></div>
+                                                    <div style="font-size: 14px; color: #155724; margin-bottom: 8px; font-weight: 600;">💰 Total Ingreso (Período)</div>
+                                                    <div style="font-size: 32px; font-weight: bold; color: #28a745;">$<?php echo number_format($total_ingresos, 0, ',', '.'); ?></div>
                                                 </div>
                                             </div>
                                             <!-- Total Egreso -->
                                             <div class="col-lg-6 col-md-6 mb-3">
                                                 <div style="padding: 20px; background-color: #f8d7da; border-radius: 8px; border-left: 5px solid #dc3545; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                                                    <div style="font-size: 14px; color: #721c24; margin-bottom: 8px; font-weight: 600;">💸 Total Egreso</div>
-                                                    <div style="font-size: 32px; font-weight: bold; color: #dc3545;">$<?php echo number_format($total_egresos_historico, 0, ',', '.'); ?></div>
+                                                    <div style="font-size: 14px; color: #721c24; margin-bottom: 8px; font-weight: 600;">💸 Total Egreso (Período)</div>
+                                                    <div style="font-size: 32px; font-weight: bold; color: #dc3545;">$<?php echo number_format($total_egresos, 0, ',', '.'); ?></div>
                                                 </div>
                                             </div>
                                             <!-- Total en Caja -->
