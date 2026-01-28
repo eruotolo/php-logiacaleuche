@@ -96,7 +96,9 @@
                     <div class="style-col col-hosp">
                         <h3>TOTAL EN CAJA HOSPITALARIO</h3>
                         <?php
-                            $query = "SELECT SUM(entrada_Monto) AS Total FROM entradadinero WHERE entrada_Motivo = 6";
+                            $query = "SELECT
+                                        COALESCE((SELECT SUM(entrada_Monto) FROM entradadinero WHERE entrada_Motivo = 6), 0) -
+                                        COALESCE((SELECT SUM(salida_Monto) FROM salidadinero WHERE salida_Motivo = 15), 0) AS Total";
                             $result_task5 = mysqli_query($link, $query);
                             if($result_task5){
                                 $row = mysqli_fetch_Array($result_task5);
